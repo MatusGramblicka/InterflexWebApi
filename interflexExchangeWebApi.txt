@@ -1,0 +1,9 @@
+1. dotnet publish -c Release
+
+2. docker build -t interflexdemo -f Dockerfile .
+
+3. docker-compose up
+
+4. Run BureaucracyAutomator2 or just call rest requests to docker interflex
+
+curl -X POST https://localhost:5001/interflex -H "Content-Type: application/json" -H "Accept: application/json" -d '{"User": "userName", "Password": "Password"}' -D-

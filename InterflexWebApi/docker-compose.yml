@@ -1,0 +1,27 @@
+version: "3"
+
+services: 
+  selenium-hub:
+    image: selenium/hub:3.141.59-yttrium
+    container_name: selenium-hub
+      
+  chrome-node:
+    image: selenium/node-chrome-debug:3.141.59-yttrium
+    #image: selenium/standalone-chrome-debug:3.141.59
+    deploy:
+      replicas: 1
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
+
+  interflex:
+    image: interflexwebapi:latest
+    depends_on:
+      - chrome-node   
+    ports:
+      - 3001:3001
