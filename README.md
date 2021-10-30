@@ -11,4 +11,4 @@ InterflexWebApi
 
 `curl -X POST http://localhost:3001/interflex -H "Content-Type: application/json" -H "Accept: application/json" -d '{"User": "userName", "Password": "Password"}' -D-`
 
-![](https://git.kistler.com/Gmt/interflexwebapi/-/raw/master/sampleImage.png?inline=false)
+![](https://github.com/MatusGramblicka/InterflexWebApi/blob/b25c89b7f095c9d74ffe8f80562f4925d96a10fe/sampleImage.png?inline=false)
