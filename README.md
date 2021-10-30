@@ -7,7 +7,7 @@ InterflexWebApi
 
 3. docker-compose up
 
-4. Run BureaucracyAutomator2 https://git.kistler.com/Gmt/bureaucracyautomator2/-/tree/master/ or just call rest requests to docker interflex to get data from Interflex
+4. Run BureaucracyAutomator2 https://github.com/MatusGramblicka/BureaucracyAutomator or just call rest requests to docker interflex to get data from Interflex
 
 `curl -X POST http://localhost:3001/interflex -H "Content-Type: application/json" -H "Accept: application/json" -d '{"User": "userName", "Password": "Password"}' -D-`
 
