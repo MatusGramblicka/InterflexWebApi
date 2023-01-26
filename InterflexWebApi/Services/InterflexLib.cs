@@ -94,11 +94,24 @@ namespace InterflexWebApi.Services
 
                             if (!tableAbsenceReasons.Text.IsEmptyOrAllSpaces())
                             {
-                                if (tableAbsenceReasons.Text == "Kant.Feiertag")
+                                if (tableAbsenceReasons.Text == "Kant.Feiertag" || tableAbsenceReasons.Text == "Neujahr/NewYear")
                                     break;
 
+                                if (tableAbsenceReasons.Text == "Overtime comp.")
+                                {
+                                    var overTimeCompDuration = _driver.FindElement(By.CssSelector($"div#dataDiv > table > tbody > tr:nth-child({j}) > td:nth-child({tableColumns.Count - 4})"));
+                                    var overTimeCompDurationText = overTimeCompDuration.Text;
+                                    var overTimeCompDurationTextOnlyNumerics = overTimeCompDurationText.Substring(0, overTimeCompDurationText.Length - 2);
+                                    localAbsenceReasons.Add(new AbsenceReason
+                                    {
+                                        Absence = tableAbsenceReasons.Text,
+                                        Duration = double.Parse(overTimeCompDurationTextOnlyNumerics)
+                                    });
+                                    break;
+                                }
+
                                 var duration = GetAbsenceReasonTimeDuration(j, tableColumns.Count);
-                                localAbsenceReasons.Add(new AbsenceReason()
+                                localAbsenceReasons.Add(new AbsenceReason
                                 {
                                     Absence = tableAbsenceReasons.Text,
                                     Duration = duration
@@ -108,7 +121,7 @@ namespace InterflexWebApi.Services
                             j++;
                         } while (!IsElementPresent(By.CssSelector($"div#dataDiv > table > tbody > tr:nth-child({j}) > td > table > tbody > tr > td:nth-child(3) > div > a > nobr")));
 
-                        listActualTimes.Add(new DayAndTime()
+                        listActualTimes.Add(new DayAndTime
                         {
                             ActualTime = tableActualTime.Text,
                             Day = tableDate.Text,
