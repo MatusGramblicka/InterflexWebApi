@@ -20,7 +20,7 @@ services:
       - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
 
   interflex:
-    image: interflexwebapi:latest
+    image: interflexdemo:latest
     depends_on:
       - chrome-node   
     ports:
